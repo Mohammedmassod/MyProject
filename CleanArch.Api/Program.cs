@@ -32,6 +32,9 @@ builder.Services.AddDbContext<MyProject.Infrastructure.Data.AppDbContext>(
 //XmlConfigurator.Configure(new FileInfo("log4net.config"));
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+builder.Services.AddScoped<IPermissionService, PermissionService>();
+builder.Services.AddScoped<IPermissionGroupService, PermissionGroupService>();
+builder.Services.AddScoped<IUserGroupService, UserGroupService>();
 
 //Injecting services.
 builder.Services.RegisterServices();

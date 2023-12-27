@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using MyProject.Application.Interfaces;
+using MyProject.Application.IRepositores;
 using MyProject.Domain.Entities;
-using MyProject.Domain.Interfaces;
 
 namespace MyProject.Application.Services
 {

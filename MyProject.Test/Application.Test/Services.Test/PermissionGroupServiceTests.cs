@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Moq;
+using MyProject.Application.IRepositores;
 using MyProject.Application.Services;
 using MyProject.Domain.Entities;
-using MyProject.Domain.Interfaces;
 using Xunit;
 
 namespace MyProject.Tests.Services

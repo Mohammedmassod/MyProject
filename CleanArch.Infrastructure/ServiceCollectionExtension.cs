@@ -9,8 +9,12 @@ namespace MyProject.Infrastructure
     {
         public static void RegisterServices(this IServiceCollection services)
         {
-           //services.AddTransient<IUserRepository, UserRepository>();
+            //AddTransient, AddScoped, or AddSingleton
+            //services.AddTransient<IUserRepository, UserRepository>();
             services.AddTransient<IUserRepository, UserRepositoryEF>();
+            services.AddTransient<IUserGroupRepository, UserGroupRepositoryEF>();
+            services.AddTransient<IPermissionRepository, PermissionRepositoryEF>();
+            services.AddTransient<IPermissionGroupRepository, PermissionGroupRepositoryEF>();
             services.AddTransient<IUnitOfWork, UnitOfWork>();
         }
     }

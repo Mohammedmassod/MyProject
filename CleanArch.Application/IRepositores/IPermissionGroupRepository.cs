@@ -2,7 +2,7 @@
 using System.Threading.Tasks;
 using MyProject.Domain.Entities;
 
-namespace MyProject.Domain.Interfaces
+namespace MyProject.Application.IRepositores
 {
     public interface IPermissionGroupRepository
     {

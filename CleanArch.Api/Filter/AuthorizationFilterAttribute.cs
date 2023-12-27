@@ -27,7 +27,7 @@ namespace MyProject.Api.Filter
 
         public void OnAuthorization(AuthorizationFilterContext context)
         {
-           /* var apiKeyHeader = context.HttpContext.Request.Headers["Authorization"].ToString();
+            var apiKeyHeader = context.HttpContext.Request.Headers["Authorization"].ToString();
             var authController = new Controllers.AuthController();
 
             if (apiKeyHeader.Any())
@@ -50,7 +50,7 @@ namespace MyProject.Api.Filter
             else
             {
                 context.Result = authController.NotAuthorized();
-            }*/
+            }
         }
 
         #endregion
