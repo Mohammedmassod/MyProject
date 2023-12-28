@@ -11,8 +11,8 @@ using MyProject.Infrastructure.Data;
 namespace MyProject.Infrastructure.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20231226213724_CompliteDataBase")]
-    partial class CompliteDataBase
+    [Migration("20231228145856_FK1")]
+    partial class FK1
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -92,7 +92,7 @@ namespace MyProject.Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("PhonexNumber")
+                    b.Property<string>("PhoneNumber")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -157,13 +157,13 @@ namespace MyProject.Infrastructure.Migrations
 
             modelBuilder.Entity("MyProject.Domain.Entities.UserGroup", b =>
                 {
-                    b.HasOne("MyProject.Domain.Entities.PermissionGroup", "PermissionGroup")
+                    b.HasOne("MyProject.Domain.Entities.PermissionGroup", "PermissionGroups")
                         .WithMany("UserGroup")
                         .HasForeignKey("PermissionGroupId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("PermissionGroup");
+                    b.Navigation("PermissionGroups");
                 });
 
             modelBuilder.Entity("MyProject.Domain.Entities.PermissionGroup", b =>

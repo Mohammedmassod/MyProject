@@ -12,7 +12,8 @@ namespace MyProject.Domain.Entities
     {
 
         public ICollection<User> Users { get; set; }
-        public PermissionGroup PermissionGroup { get; set; }
+        public PermissionGroup PermissionGroups { get; set; }
+        public int PermissionGroupId { get; set; }
 
 
     }

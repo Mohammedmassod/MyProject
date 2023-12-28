@@ -155,13 +155,13 @@ namespace MyProject.Infrastructure.Migrations
 
             modelBuilder.Entity("MyProject.Domain.Entities.UserGroup", b =>
                 {
-                    b.HasOne("MyProject.Domain.Entities.PermissionGroup", "PermissionGroup")
+                    b.HasOne("MyProject.Domain.Entities.PermissionGroup", "PermissionGroups")
                         .WithMany("UserGroup")
                         .HasForeignKey("PermissionGroupId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("PermissionGroup");
+                    b.Navigation("PermissionGroups");
                 });
 
             modelBuilder.Entity("MyProject.Domain.Entities.PermissionGroup", b =>

@@ -15,7 +15,7 @@ namespace MyProject.Application.DTO.User
             public string UserName { get; set; }
             public bool IsActive { get; set; }
             public string PhoneNumber { get; set; }
-
+            public int UserGroupId { get; set; }
 
         // Other properties as needed for creating a user
     }

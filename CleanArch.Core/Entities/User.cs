@@ -13,6 +13,7 @@ namespace MyProject.Domain.Entities
         public string UserName { get; set; } 
         public bool IsActive { get; set; }
         public string PhoneNumber { get; set; }
+        public int UserGroupId { get; set; }
         public UserGroup UserGroup { get; set; } 
 
     }

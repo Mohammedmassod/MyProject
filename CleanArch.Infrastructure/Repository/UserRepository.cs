@@ -34,6 +34,7 @@ namespace MyProject.Infrastructure.Repository
                     Email = user.Email,
                     IsActive = user.IsActive,
                     PhoneNumber = user.PhoneNumber,
+
                     // Map other properties as needed
                 });
             }

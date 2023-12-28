@@ -3,8 +3,8 @@ using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using MyProject.Application.DTO.User;
-using MyProject.Application.IRepositores;
 using MyProject.Infrastructure.Data;
+using MyProject.Application.IRepositores;
 
 namespace MyProject.Infrastructure.Repository
 {
@@ -20,6 +20,7 @@ namespace MyProject.Infrastructure.Repository
         public async Task<IEnumerable<UserResponseDTO>> GetAllAsync()
         {
             var users = await _context.Users
+                .Include(u => u.UserGroup)
                 .AsNoTracking()
                 .ToListAsync();
 
@@ -29,6 +30,7 @@ namespace MyProject.Infrastructure.Repository
         public async Task<UserResponseDTO> GetByIdAsync(int id)
         {
             var user = await _context.Users
+                .Include(u => u.UserGroup)
                 .AsNoTracking()
                 .FirstOrDefaultAsync(u => u.Id == id);
 
@@ -48,8 +50,9 @@ namespace MyProject.Infrastructure.Repository
                 Email = user.Email,
                 IsActive = user.IsActive,
                 PhoneNumber = user.PhoneNumber,
+                UserGroupId = user.UserGroupId,
                 Password = user.Password,
-                ConfirmPassword = user.ConfirmPassword,
+                ConfirmPassword = user.ConfirmPassword
                 // Map other properties as needed
             };
 
@@ -72,6 +75,7 @@ namespace MyProject.Infrastructure.Repository
             existingUser.Email = user.Email;
             existingUser.IsActive = user.IsActive;
             existingUser.PhoneNumber = user.PhoneNumber;
+            existingUser.UserGroupId = user.UserGroupId;
             // Map other properties as needed
 
             await _context.SaveChangesAsync();
@@ -103,6 +107,7 @@ namespace MyProject.Infrastructure.Repository
                 Email = user.Email,
                 IsActive = user.IsActive,
                 PhoneNumber = user.PhoneNumber,
+                UserGroupId = user.UserGroupId,
                 // Map other properties as needed
             });
         }
@@ -116,6 +121,7 @@ namespace MyProject.Infrastructure.Repository
                 Email = user.Email,
                 IsActive = user.IsActive,
                 PhoneNumber = user.PhoneNumber,
+                UserGroupId = user.UserGroupId,
                 // Map other properties as needed
             };
         }
