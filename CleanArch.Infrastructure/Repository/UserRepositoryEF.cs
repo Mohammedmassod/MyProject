@@ -1,9 +1,13 @@
 ﻿using MyProject.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using MyProject.Application.DTO.User;
 using MyProject.Infrastructure.Data;
+using MyProject.Domain.Validators;
+using FluentValidation;
+using System;
 using MyProject.Application.IRepositores;
 
 namespace MyProject.Infrastructure.Repository
@@ -56,6 +60,15 @@ namespace MyProject.Infrastructure.Repository
                 // Map other properties as needed
             };
 
+            var validator = new UserValidator();
+            var validationResult = await validator.ValidateAsync(newUser);
+
+            if (!validationResult.IsValid)
+            {
+                var validationErrors = string.Join(Environment.NewLine, validationResult.Errors.Select(error => error.ErrorMessage));
+                throw new ValidationException(validationErrors);
+            }
+
             _context.Users.Add(newUser);
             await _context.SaveChangesAsync();
 
@@ -77,6 +90,15 @@ namespace MyProject.Infrastructure.Repository
             existingUser.PhoneNumber = user.PhoneNumber;
             existingUser.UserGroupId = user.UserGroupId;
             // Map other properties as needed
+
+            var validator = new UserValidator();
+            var validationResult = await validator.ValidateAsync(existingUser);
+
+            if (!validationResult.IsValid)
+            {
+                var validationErrors = string.Join(Environment.NewLine, validationResult.Errors.Select(error => error.ErrorMessage));
+                throw new ValidationException(validationErrors);
+            }
 
             await _context.SaveChangesAsync();
 
