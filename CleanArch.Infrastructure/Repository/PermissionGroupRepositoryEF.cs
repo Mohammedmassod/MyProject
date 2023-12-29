@@ -1,38 +1,59 @@
 ﻿using MyProject.Application.IRepositores;
 using MyProject.Domain.Entities;
-using System;
+using MyProject.Infrastructure.Data;
+using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
-
 namespace MyProject.Infrastructure.Repository
 {
     public class PermissionGroupRepositoryEF : IPermissionGroupRepository
     {
-        public Task<PermissionGroup> AddAsync(PermissionGroup permissionGroup)
+        private readonly AppDbContext _context;
+
+        public PermissionGroupRepositoryEF(AppDbContext context)
         {
-            throw new NotImplementedException();
+            _context = context;
         }
 
-        public Task DeleteAsync(PermissionGroup permissionGroup)
+        public async Task<PermissionGroup> GetByIdAsync(int id)
         {
-            throw new NotImplementedException();
+            return await _context.PermissionGroups.FindAsync(id);
         }
 
-        public Task<IEnumerable<PermissionGroup>> GetAllAsync()
+        public async Task<IEnumerable<PermissionGroup>> GetAllAsync()
         {
-            throw new NotImplementedException();
+            var users = await _context.Users
+                .Include(u => u.UserGroup)
+                .AsNoTracking()
+                .ToListAsync();
+            return await _context.PermissionGroups.ToListAsync();
         }
 
-        public Task<PermissionGroup> GetByIdAsync(int id)
+        public async Task<PermissionGroup> AddAsync(PermissionGroup permissionGroup)
         {
-            throw new NotImplementedException();
+            var newUser = new PermissionGroup
+            {
+                Id = permissionGroup.Id,
+                Name = permissionGroup.Name,
+              
+                // Map other properties as needed
+            };
+            _context.PermissionGroups.Add(permissionGroup);
+            await _context.SaveChangesAsync();
+            return permissionGroup;
         }
 
-        public Task UpdateAsync(PermissionGroup permissionGroup)
+        public async Task UpdateAsync(PermissionGroup permissionGroup)
         {
-            throw new NotImplementedException();
+            _context.Entry(permissionGroup).State = EntityState.Modified;
+            await _context.SaveChangesAsync();
+        }
+
+        public async Task DeleteAsync(PermissionGroup permissionGroup)
+        {
+            _context.PermissionGroups.Remove(permissionGroup);
+            await _context.SaveChangesAsync();
         }
     }
 }
