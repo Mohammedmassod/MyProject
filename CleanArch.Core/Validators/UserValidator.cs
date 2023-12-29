@@ -1,4 +1,4 @@
-﻿/*using FluentValidation;
+﻿using FluentValidation;
 using MyProject.Domain.Entities;
 
 namespace MyProject.Domain.Validators
@@ -32,8 +32,8 @@ namespace MyProject.Domain.Validators
         }
     }
 }
-*/
-using FluentValidation;
+
+/*using FluentValidation;
 using MyProject.Domain.Entities;
 
 namespace MyProject.Domain.Validators
@@ -65,4 +65,4 @@ namespace MyProject.Domain.Validators
                 .WithMessage("Please enter a valid phone number starting with 77, 78, 73, or 71 and containing a total of 9 digits.");
         }
     }
-}
+}*/
